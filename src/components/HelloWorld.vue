@@ -23,7 +23,13 @@ export default {
       weeks: 52
     };
 
-    
+    const result = _.chain(data.dims)
+      .map(r => {
+        return { dim: r };
+      })
+      .value();
+    console.log("###");
+    console.log(result);
   }
 };
 </script>
