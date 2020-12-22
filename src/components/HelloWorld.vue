@@ -26,17 +26,18 @@ export default {
     const result = _.chain(data.dims)
       .map(r => {
         const ret = _.chain(_.range(52))
-          .map((r, idx) => [
-            "W" + _.padStart(idx + 1, 2, "0"),
-            _.random(0, 1000)
-          ])
+          .map((r, idx) => [_.padStart(idx + 1, 3, "W0"), _.random(0, 1000)])
           .fromPairs()
           .value();
-        return _.assign({ dim: r }, ret);
+        return _.assign({ Dim: r }, ret);
       })
       .value();
     console.log("###");
     console.log(result);
+    const ret = _.chain(_.range(52))
+      .map((r, idx) => _.padStart(idx + 1, 3, "W0"))
+      .value();
+    console.log(ret);
   }
 };
 </script>
