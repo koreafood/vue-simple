@@ -23,15 +23,16 @@ export default {
       weeks: 52
     };
 
-    const ret = _.chain(_.range(52))
-      .map((r, idx) => ["W" + idx, _.random(0, 1000)])
-      .fromPairs()
-      .value();
-    console.log(ret);
-
     const result = _.chain(data.dims)
       .map(r => {
-        return { dim: r };
+        const ret = _.chain(_.range(52))
+          .map((r, idx) => [
+            "W" + _.padStart(idx + 1, 2, "0"),
+            _.random(0, 1000)
+          ])
+          .fromPairs()
+          .value();
+        return _.assign({ dim: r }, ret);
       })
       .value();
     console.log("###");
