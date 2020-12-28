@@ -1,27 +1,33 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div id="realgrid" style="width: 100%; height: 400px"></div>
+    <button @click="loadData">load data~~!!</button>
   </div>
 </template>
-
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { GridView, LocalDataProvider } from "realgrid";
+import { columns, fields, rows } from "./realgrid-data";
+import 'realgrid/dist/realgrid-style.css';
+let gridView = GridView;
+let dataProvider = LocalDataProvider;
 
 export default {
-  name: "App",
-  components: {
-    HelloWorld
+  name: "RealGrid",
+  data: function() {
+    return {};
+  },
+  methods: {
+    loadData: function() {
+      dataProvider.setRows(rows);
+    }
+  },
+  mounted() {
+    dataProvider = new LocalDataProvider(false);
+    gridView = new GridView("realgrid");
+    gridView.setDataSource(dataProvider);
+
+    dataProvider.setFields(fields);
+    gridView.setColumns(columns);
   }
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
